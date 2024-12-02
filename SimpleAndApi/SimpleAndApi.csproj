@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>net8.0-android</TargetFrameworks>
+	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows</TargetFrameworks>
+	  
+	  <OutputType>Exe</OutputType>
+	  <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Platform)'!='AnyCPU' And '$(Platform)'!='Any CPU' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<RuntimeIdentifier>win-$(Platform)</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Platform)'!='AnyCPU' And '$(Platform)'!='Any CPU' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<RuntimeIdentifier>android-$(Platform)</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+	</PropertyGroup>
+
+	<!--PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'"-->
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+		<SupportedOSPlatformVersion>29</SupportedOSPlatformVersion>
+		<AndroidManifest>Platforms/Android/AndroidManifest.xml</AndroidManifest>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <AndroidResource Include="Platforms\Android\Resources\drawable\ic_launcher.png" />
+	</ItemGroup>
+</Project>
