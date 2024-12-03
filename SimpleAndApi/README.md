@@ -13,9 +13,12 @@
 
 - adb shell am start-foreground-service -n org.tool2team.simpleandapi/.MainFgService
 - adb shell am start-foreground-service -n org.tool2team.simpleandapi/.AuxFgService
+
 - adb shell am startservice -n org.tool2team.simpleandapi/.MainService
 - adb shell am startservice -n org.tool2team.simpleandapi/.AuxService
-
+ 
+- adb shell am start -n org.tool2team.simpleandapi/.MainActivity
+ 
 - adb shell am force-stop org.tool2team.simpleandapi
 
 ## Uncompile
@@ -26,6 +29,3 @@
 
 ## Termux
 - pkg install android-tools
-- adb devices
-- adb shell am start -n org.tool2team.simpleandapi/.MainActivity
-- adb shell am start -n org.tool2team.simpleandapi/org.tool2team.simpleandapi.MainActivity
